@@ -20,7 +20,22 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, Meta = (MakeEditwidget = true))
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	int xSize;
+
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	int ySize;
+
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	int smoothPoints;
+
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	float vertexSpacing;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FVector> baseVertices;
+
+	UPROPERTY(EditAnywhere,Meta = (MakeEditwidget = true))
 	TArray<FVector> vertices;
 
 	UPROPERTY(EditAnywhere)
@@ -32,7 +47,13 @@ protected:
 	UPROPERTY(EditAnywhere)
 	UMaterialInterface* material;
 
+	void CreateBaseVertices();
 
+	void SmoothVertices();
+
+	void CreateVertices();
+
+	void CreateTriangles();
 
 public:	
 	// Called every frame
