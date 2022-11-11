@@ -27,31 +27,40 @@ protected:
 	int ySize;
 
 	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	float heightVariation;
+
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 1))
 	int smoothPoints;
 
 	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
 	float vertexSpacing;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Meta = (ClampMin = 0))
+	float UVScale;
+
 	TArray<FVector> baseVertices;
 
-	UPROPERTY(EditAnywhere,Meta = (MakeEditwidget = true))
+	UPROPERTY(Meta = (MakeEditwidget = true))
 	TArray<FVector> vertices;
 
-	UPROPERTY(EditAnywhere)
 	TArray <int> triangles;
 	
-	UPROPERTY(EditAnywhere)
 	TArray <FVector2D> UV0;
 	
 	UPROPERTY(EditAnywhere)
 	UMaterialInterface* material;
 
+	int newXSize;
+
+	int newYSize;
+
+	int verticalStart;
+
 	void CreateBaseVertices();
 
 	void SmoothVertices();
 
-	void CreateVertices();
+	void SetUV();
 
 	void CreateTriangles();
 
