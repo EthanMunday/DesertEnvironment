@@ -94,7 +94,6 @@ void ADesertMesh1::SmoothVertices()
 		}
 		outPoints->Empty();
 	}
-	newYSize = xSize + ((xSize - 1) * smoothPoints);
 	verticalStart = newXSize * xSize;
 
 	delete outPoints;
@@ -129,15 +128,7 @@ void ADesertMesh1::CreateTriangles()
 			triangles.Add(x + 1);
 			triangles.Add(((x+1) * smoothPoints) + verticalStart);
 			triangles.Add((x * smoothPoints) + verticalStart);
-		}
-	}
 
-	//Middle Row Triangles
-	int verticalRow = newXSize;
-	for (int x = verticalStart; x < (vertices.Num() - smoothPoints); x += smoothPoints)
-	{
-		if ((verticalRow + 1) % newXSize != 0)
-		{
 			for (int y = 0; y < (smoothPoints - 1); y++)
 			{
 				triangles.Add(x + y);
@@ -148,9 +139,6 @@ void ADesertMesh1::CreateTriangles()
 				triangles.Add(x + y + smoothPoints + 1);
 				triangles.Add(x + y + 1);
 			}
-		}
-		verticalRow++;
-	}
 
 	//Last Row Triangles
 	int lastStart = verticalStart - 1 + smoothPoints;
@@ -167,7 +155,6 @@ void ADesertMesh1::CreateTriangles()
 			triangles.Add(verticalRow + 1);
 			triangles.Add(verticalRow);
 		}
-		verticalRow++;
 	}
 }
 
