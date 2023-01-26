@@ -114,10 +114,7 @@ void ADesertMesh1::SetUV()
 
 void ADesertMesh1::CreateTriangles()
 {
-	// First Row Triangles
-	int baseCheckNum = verticalStart - newXSize;
-
-	for (int x = 0; x < baseCheckNum; x++)
+	for (int x = 0; x < verticalStart - newXSize; x++)
 	{
 		if ((x + 1) % newXSize != 0)
 		{
@@ -126,34 +123,27 @@ void ADesertMesh1::CreateTriangles()
 			triangles.Add((x * smoothPoints) + verticalStart);
 
 			triangles.Add(x + 1);
-			triangles.Add(((x+1) * smoothPoints) + verticalStart);
+			triangles.Add(((x + 1) * smoothPoints) + verticalStart);
 			triangles.Add((x * smoothPoints) + verticalStart);
 
 			for (int y = 0; y < (smoothPoints - 1); y++)
 			{
-				triangles.Add(x + y);
-				triangles.Add(x + y + smoothPoints);
-				triangles.Add(x + y + 1);
+				triangles.Add((x * smoothPoints) + y + verticalStart);
+				triangles.Add((x * smoothPoints) + y + smoothPoints + verticalStart);
+				triangles.Add((x * smoothPoints) + y + 1 + verticalStart);
 
-				triangles.Add(x + y + smoothPoints);
-				triangles.Add(x + y + smoothPoints + 1);
-				triangles.Add(x + y + 1);
+				triangles.Add((x * smoothPoints) + y + smoothPoints + verticalStart);
+				triangles.Add((x * smoothPoints) + y + smoothPoints + verticalStart + 1);
+				triangles.Add((x * smoothPoints) + y + 1 + verticalStart);
 			}
 
-	//Last Row Triangles
-	int lastStart = verticalStart - 1 + smoothPoints;
-	verticalRow = newXSize;
-	for (int x = lastStart; x < (vertices.Num() - smoothPoints); x += smoothPoints)
-	{
-		if ((verticalRow + 1) % newXSize != 0)
-		{
-			triangles.Add(x);
-			triangles.Add(x + smoothPoints);
-			triangles.Add(verticalRow);
+			triangles.Add((x * smoothPoints) + verticalStart + (smoothPoints - 1));
+			triangles.Add((x * smoothPoints) + verticalStart + (smoothPoints - 1) + smoothPoints);
+			triangles.Add(x + newXSize);
 
-			triangles.Add(x + smoothPoints);
-			triangles.Add(verticalRow + 1);
-			triangles.Add(verticalRow);
+			triangles.Add((x * smoothPoints) + verticalStart + (smoothPoints - 1) + smoothPoints);
+			triangles.Add(x + newXSize + 1);
+			triangles.Add(x + newXSize);
 		}
 	}
 }

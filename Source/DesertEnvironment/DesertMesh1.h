@@ -40,7 +40,6 @@ protected:
 
 	TArray<FVector> baseVertices;
 
-	//UPROPERTY(Meta = (MakeEditwidget = true))
 	TArray<FVector> vertices;
 
 	TArray <int> triangles;
